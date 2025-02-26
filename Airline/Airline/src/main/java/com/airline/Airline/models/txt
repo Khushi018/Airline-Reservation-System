@@ -1,0 +1,98 @@
+public class Airport {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String airportCode;
+
+    @Column(nullable = false)
+    private String airportName;
+
+   @Column(nullable = false)
+    private String location;
+}
+public class Flight {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true, nullable = false)
+    private String flightNumber;
+    private String airlineName;
+
+    @ManyToOne
+    @JoinColumn(name = "departure_airport_id")
+    private Airport departureAirport;
+
+    @ManyToOne
+    @JoinColumn(name = "arrival_airport_id")
+    private Airport arrivalAirport;
+
+    private LocalDateTime departureTime;
+    private LocalDateTime arrivalTime;
+    private int availableSeats;
+    private double price;
+}
+
+public class Booking {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Embedded
+    private UserDTO userDto;
+
+    @ManyToOne
+    @JoinColumn(name = "flight_id", nullable = false)
+    private Flight flight;
+
+    @Column(nullable = false)
+    private int noOfSeats;
+
+    @Column(nullable = false)
+    private LocalDateTime bookingTime;
+
+    @Column(nullable = false)
+    private double totalPrice;
+
+    @Enumerated(EnumType.STRING)
+    private BookingStatus status;
+
+    public UserDTO getUserDTO() {
+        return userDto;
+    }
+
+    public void setUserDTO(UserDTO userDTO) {
+        this.userDto = userDTO;
+    }
+}
+
+
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true, nullable = false)
+    private String name;
+
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    @Column(unique = true, nullable = false)
+    private String mobileNo;
+
+    @Column(unique = true, nullable = false)
+    private String username;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role; // ADMIN or USER
+}
+
+enum Role {
+    ADMIN, USER
+}

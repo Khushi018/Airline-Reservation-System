@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data @NoArgsConstructor
 @AllArgsConstructor
-
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
