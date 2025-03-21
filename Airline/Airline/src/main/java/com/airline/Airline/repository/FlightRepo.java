@@ -22,7 +22,6 @@ public interface FlightRepo extends JpaRepository<Flight, Long>{
            "(:departureTime IS NULL OR f.departureTime >= :departureTime) AND " +
            "(:arrivalTime IS NULL OR f.arrivalTime <= :arrivalTime) AND " +
            "(:maxPrice IS NULL OR f.price <= :maxPrice)")
-
     List<Flight> searchFlights(
         @Param("departureAirportId") Long departureAirportId,
         @Param("arrivalAirportId") Long arrivalAirportId,

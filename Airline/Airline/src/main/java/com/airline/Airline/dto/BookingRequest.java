@@ -6,6 +6,6 @@ import lombok.*;
 @Data
 public class BookingRequest {
     private UserDTO userDTO;
-    private Long flightId;
+    private String flightNumber;
     private int noOfSeats;
 }

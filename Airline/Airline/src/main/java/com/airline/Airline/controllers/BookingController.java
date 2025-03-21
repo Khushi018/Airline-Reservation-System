@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/bookings")
+
 public class BookingController {
 
     @Autowired
@@ -19,6 +20,6 @@ public class BookingController {
 
     @PostMapping
     public String bookFlight(@RequestBody BookingRequest request) {
-        return bookingService.bookFlight(request.getUserDTO(), request.getFlightId(), request.getNoOfSeats());
+        return bookingService.bookFlight(request.getUserDTO(), request.getFlightNumber(), request.getNoOfSeats());
     }
 }

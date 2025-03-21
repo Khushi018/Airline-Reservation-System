@@ -23,6 +23,7 @@ public class AirportController {
     @Autowired
     private AirportService airportService;
 
+    
     @PostMapping
     public ResponseEntity<Airport> createAirport(@RequestBody Airport airport) {
         return new ResponseEntity<>(airportService.createAirport(airport), HttpStatus.CREATED);

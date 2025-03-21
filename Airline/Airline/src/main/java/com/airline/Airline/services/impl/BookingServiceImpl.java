@@ -1,16 +1,15 @@
 package com.airline.Airline.services.impl;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.airline.Airline.dto.UserDTO;
 import com.airline.Airline.models.Booking;
 import com.airline.Airline.models.Flight;
 import com.airline.Airline.repository.BookRepo;
 import com.airline.Airline.repository.FlightRepo;
-
 import com.airline.Airline.enums.BookingStatus;
 import com.airline.Airline.services.BookingService;
 
@@ -25,11 +24,31 @@ public class BookingServiceImpl implements BookingService {
     private FlightRepo flightRepository;
 
     @Override
+    public List<Booking> getAllBookings() {
+        return bookingRepository.findAll();
+    }
 
-    public String bookFlight(UserDTO userDTO, Long flightId, int noOfSeats) {
-        Flight flight = flightRepository.findById(flightId).orElse(null);
+    // @Override
+    // public List<Booking> getBookingsByUserId(Long userId) {
+    //     return bookingRepository.findByUserId(userId);
+    // }
+
+    @Override
+    public String cancelBooking(Long bookingId) {
+        Booking booking = bookingRepository.findById(bookingId).orElseThrow(() -> new RuntimeException("Booking not found!"));
+        booking.setStatus(BookingStatus.CANCELED);
+        bookingRepository.save(booking);
+        return "Booking cancelled successfully!";
+    }
+
+    
+
+    @Override
+    public String bookFlight(UserDTO userDTO, String flightNumber, int noOfSeats) {
+        Flight flight = flightRepository.findByFlightNumber(flightNumber);
+        
         if (flight == null) {
-            return "Flight not found!";
+            throw new RuntimeException("Flight not found!");
         }
 
         if (flight.getAvailableSeats() < noOfSeats) {

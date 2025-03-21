@@ -1,5 +1,6 @@
 package com.airline.Airline.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,10 @@ public class Flight {
     @JoinColumn(name = "arrival_airport_id")
     private Airport arrivalAirport;
 
+     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime departureTime;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime arrivalTime;
     private int availableSeats;
     private double price;

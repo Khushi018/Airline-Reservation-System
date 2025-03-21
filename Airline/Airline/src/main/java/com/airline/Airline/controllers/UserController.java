@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.airline.Airline.dto.LoginRequest;
 import com.airline.Airline.models.User;
 import com.airline.Airline.services.UserService;
 
@@ -11,14 +12,25 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping
+    @PostMapping("/admin-signup")
+    public ResponseEntity<User> createAdmin(@RequestBody User user) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createAdmin(user));
+    }
+
+    @PostMapping("/signup")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(user));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> loginUser(@RequestBody LoginRequest user) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.loginUser(user));
     }
 
     @GetMapping("/{id}")

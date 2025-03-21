@@ -8,5 +8,6 @@ import com.airline.Airline.models.Booking;
 
 public interface BookRepo extends JpaRepository<Booking, Long> {
     Optional<Booking> findById(Long bookingId);
+    void deleteById(Long bookingId);
     
 }

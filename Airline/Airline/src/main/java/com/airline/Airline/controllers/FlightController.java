@@ -8,6 +8,7 @@ import com.airline.Airline.models.Flight;
 import com.airline.Airline.services.FlightService;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -16,7 +17,6 @@ public class FlightController {
 
     @Autowired
     private FlightService flightService;
-
 
     @PostMapping
     public ResponseEntity<Flight> createFlight(@RequestBody Flight flight) {
@@ -44,16 +44,23 @@ public class FlightController {
         return ResponseEntity.noContent().build();
     }
 
-     @GetMapping("/search")
+    @GetMapping("/search")
     public List<Flight> searchFlights(
             @RequestParam(required = false) Long departureAirportId,
             @RequestParam(required = false) Long arrivalAirportId,
-            @RequestParam(required = false) LocalDateTime departureTime,
-            @RequestParam(required = false) LocalDateTime arrivalTime,
+            @RequestParam(required = false) String departureTime,
+            @RequestParam(required = false) String arrivalTime,
             @RequestParam(required = false) Double maxPrice) {
-        
-        return flightService.searchFlights(departureAirportId, arrivalAirportId, 
-                                           departureTime, arrivalTime, maxPrice);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        LocalDateTime parsedDepartureTime = (departureTime != null)
+                ? LocalDateTime.parse(departureTime.toString(), formatter)
+                : null;
+        LocalDateTime parsedArrivalTime = (arrivalTime != null) ? LocalDateTime.parse(arrivalTime.toString(), formatter)
+                : null;
+
+        return flightService.searchFlights(departureAirportId, arrivalAirportId,
+                parsedDepartureTime, parsedArrivalTime, maxPrice);
     }
 }
-

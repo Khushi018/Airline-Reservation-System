@@ -7,6 +7,7 @@ import com.airline.Airline.repository.AirportRepo;
 import com.airline.Airline.services.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class AirportServiceImpl implements AirportService {
     private AirportRepo airportRepo;
 
     @Override
+    @Transactional
     public Airport createAirport(Airport airport) {
         return airportRepo.save(airport);
     }
@@ -49,6 +51,7 @@ public class AirportServiceImpl implements AirportService {
             throw new AirportNotFoundException("Airport with ID " + id + " not found");
         }
         airportRepo.deleteById(id);
-
     }
+
+   
 }
