@@ -3,9 +3,9 @@
 ## Features
 
 - User-friendly interface for booking and managing reservations.
-- Real-time seat availability and pricing updates.
+- Seat availability and management updates.
 - Payment and Mail System
-- Admin panel for managing flights, users, and bookings.
+- Admin panel for managing flights, airports, users, and bookings.
 - Email notifications for booking confirmations and updates.
 
 ## Functionalities
@@ -36,13 +36,23 @@
 - `PUT /api/bookings/:id` - Update an existing booking.
 - `DELETE /api/bookings/:id` - Cancel a booking.
 
+### Airport Endpoints
+- `GET /api/airports` - Get a list of all airports.
+- `GET /api/airports/:id` - Get details of a specific airport.
+- `POST /api/airports` - Add a new airport (Admin only).
+- `PUT /api/airports/:id` - Update airport details (Admin only).
+- `DELETE /api/airports/:id` - Delete an airport (Admin only).
+
+### Payment Endpoints
+- `POST /api/pay` - Process a payment for a booking.
 
 ## Technologies Used
 
 - **Frontend**: React.js
-- **Backend**: Java, Spring
+- **Backend**: Java, SpringBoot
 - **Database**: SQL
 - **Authentication**: JSON Web Tokens (JWT)
+- **Testing Tool**: JUnit, MockMvc
 
 ![air](https://github.com/user-attachments/assets/8b1c10a7-ee09-4a35-8d95-8bb6a431dd31)
 
