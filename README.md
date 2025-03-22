@@ -54,21 +54,9 @@
 - **Authentication**: JSON Web Tokens (JWT)
 - **Testing Tool**: JUnit, MockMvc
 
+## ER Diagram 
 ![air](https://github.com/user-attachments/assets/8b1c10a7-ee09-4a35-8d95-8bb6a431dd31)
 
-## Contributing
+## User Interface
+![air-hero](https://github.com/user-attachments/assets/f4e0b1e8-95f6-4208-8bce-7f5b0c84f495)
 
-Contributions are welcome! Please follow these steps:
-1. Fork the repository.
-2. Create a new branch:
-    ```bash
-    git checkout -b feature-name
-    ```
-3. Commit your changes:
-    ```bash
-    git commit -m "Add feature-name"
-    ```
-4. Push to the branch:
-    ```bash
-    git push origin feature-name
-    ```
