@@ -20,6 +20,7 @@ public class FlightServiceImpl implements FlightService {
 
     public FlightServiceImpl(FlightRepo flightRepository) {
         this.flightRepository = flightRepository;
+       
     }
 
     @Autowired

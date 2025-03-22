@@ -11,6 +11,7 @@ public interface FlightService {
     List<Flight> getAllFlights();
     Flight updateFlight(Long id, Flight updatedFlight);
     void deleteFlight(Long id);
+    //String cancleFlight(Long id);
 
      List<Flight> searchFlights(Long departureAirportId, Long arrivalAirportId, 
                                LocalDateTime departureTime, LocalDateTime arrivalTime, 

@@ -32,7 +32,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
            .requestMatchers("/api/users/signup", "/api/users/login", "/api/users/admin-signup").permitAll() //without token
             .requestMatchers("/api/**").hasAnyAuthority("USER", "ADMIN")
-                 .requestMatchers("api/admin/**").hasAnyAuthority("ADMIN")
+                 .requestMatchers("api/admin/**", "/api/airports", "/api/flights").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated() //without token
             )
          .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

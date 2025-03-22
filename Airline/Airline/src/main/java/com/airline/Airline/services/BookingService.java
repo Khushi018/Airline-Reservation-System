@@ -9,5 +9,6 @@ public interface BookingService  {
     public String bookFlight(UserDTO userDTO, String flightId, int noOfSeats);
     public String cancelBooking(Long bookingId);
     public List<Booking> getAllBookings();
-    // public List<Booking> getBookingsByUserId(Long userId);
+     public List<Booking> getBookingsByUserId(Long userId);
+     
 }

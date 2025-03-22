@@ -29,13 +29,13 @@ public class JwtUtil {
 
     private String createToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(subject)
-                .setHeaderParam("typ", "JWT")
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 5 minutes expiration time
-                .signWith(getSigningKey())
-                .compact();
+            .setClaims(claims)
+            .setSubject(subject)
+            .setHeaderParam("typ", "JWT")
+            .setIssuedAt(new Date(System.currentTimeMillis()))
+            .setExpiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24 * 7)) 
+            .signWith(getSigningKey())
+            .compact();
     }
 
     public String extractUsername(String token) {
@@ -63,6 +63,14 @@ public class JwtUtil {
     }
 
     public boolean validateToken(String token, String username) {
-        return (extractUsername(token).equals(username) && !extractExpiration(token).before(new Date()));
+        // return (extractUsername(token).equals(username) && !extractExpiration(token).before(new Date()));
+        try {
+            final String extractedUsername = extractUsername(token);
+            return (extractedUsername.equals(username) && !isTokenExpired(token));
+        } catch (ExpiredJwtException e) {
+            throw new JwtException("JWT Token has expired");
+        } catch (Exception e) {
+            throw new JwtException("Invalid JWT Token");
+        }
     }
 }
