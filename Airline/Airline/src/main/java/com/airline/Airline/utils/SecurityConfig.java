@@ -30,9 +30,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http,  JwtAuthenticationFilter jwtAuthFilter) throws Exception {
         http.csrf(csrf -> csrf.disable()) // Disable CSRF
             .authorizeHttpRequests(auth -> auth
-           .requestMatchers("/api/users/signup", "/api/users/login", "/api/users/admin-signup").permitAll() //without token
-            .requestMatchers("/api/**").hasAnyAuthority("USER", "ADMIN")
-                 .requestMatchers("api/admin/**", "/api/airports", "/api/flights").hasAnyAuthority("ADMIN")
+           .requestMatchers("/api/**").permitAll() //without token
+            // .requestMatchers("/api/**").hasAnyAuthority("USER", "ADMIN")
+            //      .requestMatchers("api/admin/**", "/api/airports", "/api/flights").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated() //without token
             )
          .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

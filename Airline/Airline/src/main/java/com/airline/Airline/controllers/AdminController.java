@@ -32,7 +32,4 @@ public class AdminController {
         return bookingService.getAllBookings();
     }
 
-
-
-    
 }
